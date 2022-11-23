@@ -1,0 +1,23 @@
+body {
+  font-style: 14px;
+}
+
+.wrap {
+  width: 1200px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #1D82FE;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.bs {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
