@@ -34,9 +34,9 @@ const imgRef = ref()
 const changeCaptcha = () => {
   imgRef.value.src = 'http://localhost:8080/users/captcha?v=' + (new Date).getTime()
 }
-nextTick(() => {
-  changeCaptcha()
-})
+// nextTick(() => {
+//   changeCaptcha()
+// })
 
 
 const router = useRouter()

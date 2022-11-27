@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick, watch, onMounted, onActivated } from 'vue';
+import { ref, onMounted, onActivated, watch } from 'vue';
 import useChatsStore from '@/stores/modules/chats';
 import { saveChats } from "@/services/modules/chats";
 import useScroll from '@/hooks/useScroll';
@@ -46,7 +46,7 @@ const sendHandler = () => {
 }
 
 const chatRef = ref()
-const { scrollTop, scrollHeight, clientHeight, isReachTop } = useScroll(chatRef)
+const { scrollTop, scrollHeight, clientHeight, isReachTop, isReachBottom } = useScroll(chatRef)
 
 onMounted(() => {
   setTimeout(() => {
@@ -56,6 +56,12 @@ onMounted(() => {
   }, 500)
 })
 
+// 监听到达底部
+watch(isReachBottom, (newValue) => {
+  if (newValue) {
+    chatRef.value.style.opacity = 1
+  }
+})
 
 // 保留原来的位置
 onActivated(() => {
@@ -63,8 +69,6 @@ onActivated(() => {
     top: scrollTop.value
   })
 })
-
-
 </script>
 
 <style lang="less" scoped>
@@ -75,7 +79,12 @@ onActivated(() => {
     height: 70vh;
     border-radius: 5px;
     padding: 20px;
-    overflow-y: auto;
+    overflow: hidden;
+    opacity: 0;
+
+    &:hover {
+      overflow-y: auto;
+    }
 
     .info-wrap {
       margin-top: 10px;
