@@ -1,7 +1,7 @@
 import sxRequest from '../request'
 
 export function loginApi(username, password, captcha) {
-  console.log(username, password, captcha);
+  // console.log(username, password, captcha);
   return sxRequest.post({
     url: '/users/login',
     data: {

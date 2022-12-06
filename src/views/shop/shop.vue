@@ -29,10 +29,13 @@ const totalPrice = computed(() => {
 })
 
 const removeHandler = (item) => {
-  deleteFavor(item.id).then(res => {
-    console.log('favor-delete', res);
-    res ? favor.fetchFavorList() : ''
-  })
+  const user_id = window.localStorage.getItem('user_id')
+  if (user_id) {
+    deleteFavor(item.id).then(res => {
+      console.log('favor-delete', res);
+      res ? favor.fetchFavorList() : ''
+    })
+  }
 }
 </script>
 
@@ -51,7 +54,7 @@ const removeHandler = (item) => {
   }
 
   .total-price {
-    position: absolute;
+    position: fixed;
     bottom: 50px;
     padding: 20px;
     border-radius: 5px;

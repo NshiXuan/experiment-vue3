@@ -32,17 +32,20 @@ chats.fetchChatsList(1, size)
 const content = ref()
 const sendHandler = () => {
   console.log(content.value)
-  saveChats(content.value, 1).then(res => {
-    size = size + 1
-    console.log(size);
-    chats.fetchChatsList(1, size)
-    content.value = ''
-    setTimeout(() => {
-      chatRef.value?.scrollTo({
-        top: chatRef.value.scrollHeight
-      })
-    }, 500)
-  })
+  const user_id = window.localStorage.getItem('user_id')
+  if (user_id) {
+    saveChats(content.value, user_id).then(res => {
+      size = size + 1
+      console.log(size);
+      chats.fetchChatsList(1, size)
+      content.value = ''
+      setTimeout(() => {
+        chatRef.value?.scrollTo({
+          top: chatRef.value.scrollHeight
+        })
+      }, 1000)
+    })
+  }
 }
 
 const chatRef = ref()
@@ -53,12 +56,15 @@ onMounted(() => {
     chatRef.value?.scrollTo({
       top: chatRef.value.scrollHeight
     })
-  }, 500)
+    console.log('chatRef.value.scrollHeight', chatRef)
+    // chatRef.value.style.opacity = 1
+  }, 1000)
 })
 
 // 监听到达底部
 watch(isReachBottom, (newValue) => {
   if (newValue) {
+    console.log('newvalue')
     chatRef.value.style.opacity = 1
   }
 })

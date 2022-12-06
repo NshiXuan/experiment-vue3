@@ -42,9 +42,9 @@ const changeCaptcha = () => {
 const router = useRouter()
 const loginHandler = () => {
   loginApi(username.value, password.value, captcha.value).then(res => {
-    console.log(res)
     if (res && res.code == 0) {
       window.localStorage.setItem('token', res.data.token)
+      window.localStorage.setItem('user_id', res.data.id)
       router.push('/home')
     }
   })
@@ -61,7 +61,7 @@ const loginHandler = () => {
   background: #666;
 
   .wrapper {
-    padding: 20px;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -75,7 +75,7 @@ const loginHandler = () => {
     }
 
     input {
-      padding: 5px;
+      padding: 10px;
       border: 2px solid #efefef;
       outline-color: #1D82FE;
       border-radius: 5px;

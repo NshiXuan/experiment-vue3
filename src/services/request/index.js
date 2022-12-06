@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElLoading } from 'element-plus'
 
 import { BASE_URL, TIMEOUT } from './config'
 import router from '@/router'
@@ -18,14 +18,32 @@ class SxRequest {
         config.headers['Token'] = token
       }
 
+      ElLoading.service({
+        lock: true,
+        background: 'rgba(0, 0, 0, 0.1)',
+      });
+
       return config
     }, err => {
       return err
     })
 
     this.instance.interceptors.response.use(res => {
+      const loading = ElLoading.service();
+      loading.close();
+
+      if (res.data.code === 0 && res.data.msg) {
+        ElMessage({
+          type: 'success',
+          message: res.data.msg
+        })
+      }
+
       return res
     }, err => {
+      const loading = ElLoading.service();
+      loading.close();
+
       if (!err.response.data.code) return err
 
       if (err.response.data.code === 60002 || err.response.data.code === 6001) {

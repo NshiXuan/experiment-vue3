@@ -7,7 +7,7 @@
         </router-link>
       </div>
 
-      <button class="logout" @click="logoutHandler">退出</button>
+      <div class="logout" @click="logoutHandler">退出登录</div>
     </div>
   </div>
 </template>
@@ -51,6 +51,7 @@ const logoutHandler = () => {
   logoutApi().then(res => {
     console.log('res', res)
     window.localStorage.clear('token')
+    window.localStorage.clear('user_id')
     router.push('/login')
   })
 }
@@ -88,6 +89,7 @@ const logoutHandler = () => {
       right: 0;
       top: 5px;
       height: 40px;
+      line-height: 40px;
 
       &:hover {
         cursor: pointer;

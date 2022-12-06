@@ -12,6 +12,7 @@ const useChatsStore = defineStore('chats', {
   actions: {
     async fetchChatsList(page, size) {
       const res = await getChatsList(page, size)
+      console.log(res)
       // res ? this.chatList.push(...res.data.reverse()) : ''
       res ? this.chatList = res.data.reverse() : ''
     }

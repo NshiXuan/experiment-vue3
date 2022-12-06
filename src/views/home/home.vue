@@ -20,12 +20,14 @@ goods.fetchGoodsList()
 
 // 加入购物车
 const addHandler = (item) => {
-  addFavor(item.id, 1).then(res => {
-    console.log(res);
-  }).catch(err => {
-    console.log(err);
-  })
-
+  const user_id = window.localStorage.getItem('user_id')
+  if (user_id) {
+    addFavor(item.id, user_id).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
 }
 </script>
 

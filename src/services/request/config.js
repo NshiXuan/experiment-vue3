@@ -1,2 +1,2 @@
-export const BASE_URL = "http://localhost:8080"
+export const BASE_URL = "http://localhost:9999"
 export const TIMEOUT = 10000
